@@ -3,8 +3,8 @@
 An extension for [league/commonmark](https://github.com/thephpleague/commonmark)
 version 1 built using PHP 7.4. This replaces YouTube links with the embed iframe.
 
-The extension supports for tracks, artists, albums and playlists using the embed
-URL format.
+The extension supports for the primary YouTube URL, with and without prefixed with
+the `www`. It also supports the short shareable URL using the `youtu.be` domain.
 
 Initially based on the [YouTube extension](https://github.com/zoonru/commonmark-ext-youtube-iframe).
 

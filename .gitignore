@@ -1,0 +1,6 @@
+/.idea/
+/composer.lock
+/vendor/
+/code-analysis/
+.DS_Store
+.phpunit.result.cache

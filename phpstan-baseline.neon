@@ -1,0 +1,7 @@
+parameters:
+	ignoreErrors:
+		-
+			message: "#^Cannot call method getType\\(\\) on Trovster\\\\CommonMark\\\\Ext\\\\SpotifyIframe\\\\Url\\\\Url\\|null\\.$#"
+			count: 1
+			path: tests/Unit/Url/AlbumTest.php
+

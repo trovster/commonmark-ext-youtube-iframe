@@ -1,7 +1,7 @@
 # YouTube iframe extension
 
 An extension for [league/commonmark](https://github.com/thephpleague/commonmark)
-version 1 built using PHP 7.4. This replaces YouTube links with the embed iframe.
+version 2 built using PHP 8.0. This replaces YouTube links with the embed iframe.
 
 The extension supports for the primary YouTube URL, with and without prefixed with
 the `www`. It also supports the short shareable URL using the `youtu.be` domain.
@@ -21,25 +21,24 @@ composer require surface/commonmark-ext-youtube-iframe
 Configure your CommonMark `Environment` and add the extension.
 
 ```php
-use League\CommonMark\CommonMarkConverter as Converter;
-// use League\CommonMark\GithubFlavoredMarkdownConverter as Converter;
-use League\CommonMark\Environment;
+use League\CommonMark\Environment\Environment;
+use League\CommonMark\MarkdownConverter as Converter;
 use Surface\CommonMark\Ext\YouTubeIframe\Extension as YouTubeExtension;
 
-$environment = Environment::createCommonMarkEnvironment();
-$environment->addExtension(new YouTubeExtension());
-
-$config = [
+$options = [
     'youtube_width' => '800',
     'youtube_height' => '600',
 ];
 
-$converter = new Converter($config, $environment);
+$environment = new Environment($options);
+$environment->addExtension(new YouTubeExtension());
 
-echo $converter->convertToHtml('[](https://youtu.be/xxx)');
-echo $converter->convertToHtml('[](https://www.youtube.com/watch?v=xxx)');
-echo $converter->convertToHtml('[](https://youtu.be/xxx?height=480)');
-echo $converter->convertToHtml('[](https://www.youtube.com/watch?v=xxx&width=640)');
+$converter = new Converter($environment);
+
+echo $converter->convert('[](https://youtu.be/xxx)');
+echo $converter->convert('[](https://www.youtube.com/watch?v=xxx)');
+echo $converter->convert('[](https://youtu.be/xxx?height=480)');
+echo $converter->convert('[](https://www.youtube.com/watch?v=xxx&width=640)');
 ```
 
 ### Dimensions

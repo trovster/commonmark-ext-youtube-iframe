@@ -12,7 +12,7 @@ grumphp:
             with_dependencies: false
             strict: false
         phpversion:
-            project: '7.4'
+            project: '8.0'
         phpstan:
             configuration: phpstan.neon
             memory_limit: "2G"

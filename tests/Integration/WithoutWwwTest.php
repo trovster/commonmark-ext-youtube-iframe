@@ -2,9 +2,6 @@
 
 namespace Surface\CommonMark\Ext\YouTubeIframe\Tests\Integration;
 
-use League\CommonMark\CommonMarkConverter;
-use League\CommonMark\Environment;
-use Surface\CommonMark\Ext\YouTubeIframe\Extension;
 use Surface\CommonMark\Ext\YouTubeIframe\Tests\TestCase;
 
 /** @group without-www */
@@ -20,11 +17,7 @@ final class WithoutWwwTest extends TestCase
     {
         $markdown = "[]({$this->url})";
 
-        $environment = Environment::createCommonMarkEnvironment();
-        $environment->addExtension(new Extension());
-        $converter = new CommonMarkConverter([], $environment);
-
-        $html = $converter->convertToHtml($markdown);
+        $html = $this->converter->convert($markdown);
 
         $this->assertStringContainsString($this->getHtml($this->embedUrl), $html);
     }
@@ -36,11 +29,7 @@ final class WithoutWwwTest extends TestCase
         $embedUrl = "{$this->embedUrl}?start=10";
         $markdown = "[]({$url})";
 
-        $environment = Environment::createCommonMarkEnvironment();
-        $environment->addExtension(new Extension());
-        $converter = new CommonMarkConverter([], $environment);
-
-        $html = $converter->convertToHtml($markdown);
+        $html = $this->converter->convert($markdown);
 
         $this->assertStringContainsString($this->getHtml($embedUrl), $html);
     }
@@ -51,11 +40,7 @@ final class WithoutWwwTest extends TestCase
         $url = "{$this->url}&width=640";
         $markdown = "[]({$url})";
 
-        $environment = Environment::createCommonMarkEnvironment();
-        $environment->addExtension(new Extension());
-        $converter = new CommonMarkConverter([], $environment);
-
-        $html = $converter->convertToHtml($markdown);
+        $html = $this->converter->convert($markdown);
 
         $this->assertStringContainsString($this->getHtml($this->embedUrl, 640, 600), $html);
     }
@@ -66,11 +51,7 @@ final class WithoutWwwTest extends TestCase
         $url = "{$this->url}&height=480";
         $markdown = "[]({$url})";
 
-        $environment = Environment::createCommonMarkEnvironment();
-        $environment->addExtension(new Extension());
-        $converter = new CommonMarkConverter([], $environment);
-
-        $html = $converter->convertToHtml($markdown);
+        $html = $this->converter->convert($markdown);
 
         $this->assertStringContainsString($this->getHtml($this->embedUrl, 800, 480), $html);
     }
@@ -81,11 +62,7 @@ final class WithoutWwwTest extends TestCase
         $url = "{$this->url}&width=640&height=480";
         $markdown = "[]({$url})";
 
-        $environment = Environment::createCommonMarkEnvironment();
-        $environment->addExtension(new Extension());
-        $converter = new CommonMarkConverter([], $environment);
-
-        $html = $converter->convertToHtml($markdown);
+        $html = $this->converter->convert($markdown);
 
         $this->assertStringContainsString($this->getHtml($this->embedUrl, 640, 480), $html);
     }
@@ -97,17 +74,15 @@ final class WithoutWwwTest extends TestCase
         $embedUrl = "{$this->embedUrl}?start=15";
         $markdown = "[]({$url})";
 
-        $environment = Environment::createCommonMarkEnvironment();
-        $environment->addExtension(new Extension());
-        $converter = new CommonMarkConverter([], $environment);
-
-        $html = $converter->convertToHtml($markdown);
+        $html = $this->converter->convert($markdown);
 
         $this->assertStringContainsString($this->getHtml($embedUrl, 640, 480), $html);
     }
 
     protected function setUp(): void
     {
+        parent::setUp();
+
         $this->uuid = uniqid();
         $this->url = "https://youtube.com/watch?v={$this->uuid}";
         $this->embedUrl = "https://www.youtube.com/embed/{$this->uuid}";

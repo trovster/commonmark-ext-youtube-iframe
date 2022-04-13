@@ -9,16 +9,12 @@ abstract class Parser implements Contract
 {
     protected string $host = '';
     protected string $type;
-    protected int $defaultWidth;
-    protected int $defaultHeight;
 
     abstract protected function getUuid(string $url): ?string;
 
-    public function __construct(int $defaultWidth = 800, int $defaultHeight = 600)
+    public function __construct(protected int $defaultWidth = 800, protected int $defaultHeight = 600)
     {
         $this->setType();
-        $this->defaultWidth = $defaultWidth;
-        $this->defaultHeight = $defaultHeight;
     }
 
     public function parse(string $url): ?Url

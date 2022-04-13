@@ -42,10 +42,8 @@ final class ParserTest extends TestCase
     /**
      * @test
      * @dataProvider widthProvider
-     * @param int|string $width
-     * @param int|string|null $same
      */
-    public function urlWithWidth($width, $same): void
+    public function urlWithWidth(int|string $width, int|string|null $same): void
     {
         $uuid = uniqid();
         $url = "https://example.com/example/{$uuid}?width={$width}";
@@ -73,10 +71,8 @@ final class ParserTest extends TestCase
     /**
      * @test
      * @dataProvider heightProvider
-     * @param int|string $height
-     * @param int|string|null $same
      */
-    public function urlWithHeight($height, $same): void
+    public function urlWithHeight(int|string $height, int|string|null $same): void
     {
         $uuid = uniqid();
         $url = "https://example.com/example/{$uuid}?height={$height}";
@@ -104,10 +100,8 @@ final class ParserTest extends TestCase
     /**
      * @test
      * @dataProvider timestampProvider
-     * @param int|string $timestamp
-     * @param int|string|null $same
      */
-    public function urlWithTimestamp($timestamp, $same): void
+    public function urlWithTimestamp(int|string $timestamp, int|string|null $same): void
     {
         $uuid = uniqid();
         $url = "https://example.com/example/{$uuid}?t={$timestamp}";
@@ -124,10 +118,9 @@ final class ParserTest extends TestCase
         $this->parser = $this->getMockForAbstractClass(Parser::class, [], 'Example');
     }
 
-    /** @return mixed */
-    protected function invokeMethod(object $object, string $methodName, array $parameters = [])
+    protected function invokeMethod(object $object, string $methodName, array $parameters = []): mixed
     {
-        $reflection = new ReflectionClass(get_class($object));
+        $reflection = new ReflectionClass($object::class);
         $method = $reflection->getMethod($methodName);
         $method->setAccessible(true);
 

@@ -3,31 +3,24 @@
 namespace Surface\CommonMark\Ext\YouTubeIframe;
 
 use InvalidArgumentException;
-use League\CommonMark\ElementRendererInterface;
-use League\CommonMark\HtmlElement;
-use League\CommonMark\Inline\Element\AbstractInline;
-use League\CommonMark\Inline\Renderer\InlineRendererInterface;
+use League\CommonMark\Node\Node;
+use League\CommonMark\Renderer\ChildNodeRendererInterface;
+use League\CommonMark\Renderer\NodeRendererInterface;
+use League\CommonMark\Util\HtmlElement;
 use Surface\CommonMark\Ext\YouTubeIframe\Iframe;
 
-final class Renderer implements InlineRendererInterface
+final class Renderer implements NodeRendererInterface
 {
-    protected int $height;
-    protected int $width;
-    protected bool $allowFullScreen;
-
-    public function __construct(int $width, int $height, bool $allowFullScreen = false)
+    public function __construct(protected int $width, protected int $height, protected bool $allowFullScreen = false)
     {
-        $this->width = $width;
-        $this->height = $height;
-        $this->allowFullScreen = $allowFullScreen;
     }
 
-    /** @return \League\CommonMark\HtmlElement|string|null */
+    /** @return \League\CommonMark\Util\HtmlElement|string|null */
     // phpcs:ignore SlevomatCodingStandard.Functions.UnusedParameter.UnusedParameter
-    public function render(AbstractInline $inline, ElementRendererInterface $htmlRenderer)
+    public function render(Node $inline, ChildNodeRendererInterface $htmlRenderer)
     {
         if (! ($inline instanceof Iframe)) {
-            throw new InvalidArgumentException('Incompatible inline type: ' . get_class($inline));
+            throw new InvalidArgumentException('Incompatible inline type: ' . $inline::class);
         }
 
         $src = "https://www.youtube.com/embed/{$inline->getUrl()->getUuid()}";
@@ -40,10 +33,10 @@ final class Renderer implements InlineRendererInterface
         }
 
         return new HtmlElement('iframe', [
-            'width' => $width ?: $this->width,
-            'height' => $height ?: $this->height,
+            'width' => (string) ($width ?: $this->width),
+            'height' => (string) ($height ?: $this->height),
             'src' => $src,
-            'frameborder' => 0,
+            'frameborder' => '0',
             'allowfullscreen' => $this->allowFullScreen,
             'allow' => 'autoplay; fullscreen; picture-in-picture',
         ]);

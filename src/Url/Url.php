@@ -6,19 +6,13 @@ use Surface\CommonMark\Ext\YouTubeIframe\Url\Contracts\Url as Contract;
 
 final class Url implements Contract
 {
-    protected string $type;
-    protected string $uuid;
-    protected ?int $width;
-    protected ?int $height;
-    protected ?int $timestamp;
-
-    public function __construct(string $type, string $uuid, ?int $width, ?int $height, ?int $timestamp)
-    {
-        $this->type = $type;
-        $this->uuid = $uuid;
-        $this->width = $width;
-        $this->height = $height;
-        $this->timestamp = $timestamp;
+    public function __construct(
+        protected string $type,
+        protected string $uuid,
+        protected ?int $width,
+        protected ?int $height,
+        protected ?int $timestamp
+    ) {
     }
 
     public function getType(): string

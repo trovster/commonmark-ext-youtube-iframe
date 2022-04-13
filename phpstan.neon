@@ -12,10 +12,6 @@ parameters:
         - tests
     ignoreErrors:
         -
-            message: "#^Parameter \\#2 \\$attributes of class League\\\\CommonMark\\\\HtmlElement constructor expects array\\<string\\>, array\\<string, bool\\|int\\|string\\> given\\.$#"
-            count: 1
-            path: src/Renderer.php
-        -
             message: "#^Cannot call method (getType|getUuid|getTimestamp|getWidth|getHeight)\\(\\) on [A-Za-z\\\\]+\\\\Url\\\\Url\\|null\\.$#"
             path: tests/Unit/Url
 

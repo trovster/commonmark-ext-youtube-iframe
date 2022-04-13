@@ -34,10 +34,12 @@
 
      <rule ref="SlevomatCodingStandard.Functions">
         <exclude name="SlevomatCodingStandard.Functions.RequireTrailingCommaInCall.MissingTrailingComma"/>
+        <exclude name="SlevomatCodingStandard.Functions.RequireTrailingCommaInDeclaration.MissingTrailingComma"/>
     </rule>
 
     <rule ref="SlevomatCodingStandard.Classes">
         <exclude name="SlevomatCodingStandard.Classes.EmptyLinesAroundClassBraces"/>
+        <exclude name="SlevomatCodingStandard.Classes.DisallowConstructorPropertyPromotion.DisallowedConstructorPropertyPromotion"/>
     </rule>
 
     <rule ref="SlevomatCodingStandard.Namespaces">
@@ -66,9 +68,5 @@
 
     <rule ref="SlevomatCodingStandard.Files.LineLength">
         <exclude-pattern>/tests/TestCase.php</exclude-pattern>
-    </rule>
-
-    <rule ref="SlevomatCodingStandard.TypeHints.DisallowMixedTypeHint.DisallowedMixedTypeHint">
-        <exclude-pattern>/tests/Unit/Url/ParserTest.php</exclude-pattern>
     </rule>
 </ruleset>
